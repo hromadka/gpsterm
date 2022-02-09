@@ -36,7 +36,11 @@ int main(int argc, char ** argv){
 
 
 	if (simulation_mode) {
-		std::cout << "$GPGGA,165125.568,,,,,0,00,,,M,0.0,M,,0000*59" << std::endl;
+		while (1) {
+			//"$GPGGA,165125.568,,,,,0,00,,,M,0.0,M,,0000*59"
+			std::cout << "$GPGGA,165125.568,33.70024,N,112.09462,W,333,00,,,M,0.0,M,,0000*99" << std::endl;
+			sleep(1);
+		}
 
 	} else {
 		// Create serial port object 

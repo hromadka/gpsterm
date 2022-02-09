@@ -1,7 +1,9 @@
 #include <CppLinuxSerial/SerialPort.hpp>
 #include <cstring>
+#include <string>		// stoi
 #include <locale>		// std::locale, std::tolower
 #include <unistd.h>		// sleep
+
 
 using namespace mn::CppLinuxSerial;
 
@@ -22,7 +24,7 @@ int main(int argc, char ** argv){
 			std::cout << "  ./gpsterm [options]" << std::endl << std::endl;
 			std::cout << "Input arguments:" << std::endl;
 			std::cout << "  -h              help" << std::endl;
-			std::cout << "  -i              sets ID.  Default ID is 0." << std::endl;
+			std::cout << "  -i              sets ID to the specified integer.  Default ID is 0." << std::endl;
 			std::cout << "  -p <USB_port>   specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0." << std::endl;
 			std::cout << "  -s              controls simulation mode.  If '-s' flag is used, gpsterm reports a simulated position with random walk.  " << std::endl;
 			std::cout << "  -v 				version info." << std::endl;
@@ -30,7 +32,7 @@ int main(int argc, char ** argv){
             return 0;
 		} else if ((arg == "-i") || (arg == "--id")) {
             if (i + 1 < argc) { 
-                provider_id = argv[i+1];
+                provider_id = stoi(argv[i+1]);
 				i++; 
             } else { 
                 std::cerr << "--id option requires a value!" << std::endl;

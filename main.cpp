@@ -6,12 +6,13 @@
 using namespace mn::CppLinuxSerial;
 
 int main(int argc, char ** argv){
-	std::string gpsport = "/dev/ttyUSB0";
+	std::string gpsport = "ttyUSB0";
 	bool simulation_mode = false;
 
 	for(int i = 1; i < argc; i++) {
 		// print all input params to confirm
-		//printf("Argument %d: %s\n", (i+1), argv[i]);
+		printf("Argument %d: %s\n", (i+1), argv[i]);
+	/*
 		std::string arg = argv[i];
         if ((arg == "-h") || (arg == "--help")) {
             std::cout << "'gpsterm' is a simple utility to read incoming NMEA strings from an attached GPS over a serial port." << std::endl;
@@ -30,9 +31,11 @@ int main(int argc, char ** argv){
 			simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
         } else {
             std::cout << "unrecognized input parameter: " << argv[i] << std::endl;
-        }		
+        }
+		*/		
 	}
 		
+	std::cout << "using port /dev/" + gpsport << std::endl;	
 	std::cout << "simulation mode = " << simulation_mode << std::endl;
 
 

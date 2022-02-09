@@ -32,7 +32,7 @@ int main(int argc, char ** argv){
             return 0;
 		} else if ((arg == "-i") || (arg == "--id")) {
             if (i + 1 < argc) { 
-                provider_id = strtol(argv[i+1]);
+                provider_id = strtol(argv[i+1], NULL, 10);
 				i++; 
             } else { 
                 std::cerr << "--id option requires a value!" << std::endl;

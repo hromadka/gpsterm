@@ -16,7 +16,7 @@ int main(int argc, char ** argv){
             std::cout << "'gpsterm' is a simple utility to read incoming NMEA strings from an attached GPS over a serial port." << std::endl;
 			std::cout << "Input arguments:"  << std::endl;
 			std::cout << "  -p <USB_port> specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0." << std::endl;
-			std::cout << "  -s <true> controls simulation mode.  If '-s true', gpsterm reports a simulated position with random walk.  " << std::endl;
+			std::cout << "  -s controls simulation mode.  If '-s' flag is used, gpsterm reports a simulated position with random walk.  " << std::endl;
             return 0;
         } else if ((arg == "-p") || (arg == "--port")) {
             if (i + 1 < argc) { 
@@ -26,14 +26,7 @@ int main(int argc, char ** argv){
                 return 1;
             }  
 		} else if ((arg == "-s") || (arg == "--sim")) {
-            if (i + 1 < argc) {		
-				std::string argv = argv[i++];
-                if (argv == "true")
-					simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
-            } else { 
-                std::cerr << "--sim option requires a value!" << std::endl;
-                return 1;
-            }  
+			simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
         } else {
             std::cout << "unrecognized input parameter: " << argv[i] << std::endl;
         }		

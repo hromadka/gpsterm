@@ -39,8 +39,8 @@ int main(int argc, char ** argv){
 	if (simulation_mode) {
 		while (1) {
 			//"$GPGGA,165125.568,,,,,0,00,,,M,0.0,M,,0000*59"
-			std::lat = "33.70024";
-			std::lon = "112.09462";
+			std::string lat = "33.70024";
+			std::string lon = "112.09462";
 			std::cout << "$GPGGA,165125.568,33.70024,N,112.09462,W,333,00,,,M,0.0,M,,0000*99" << std::endl;
 			std::cout << rand()%10;
 			sleep(1);

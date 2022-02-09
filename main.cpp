@@ -41,8 +41,11 @@ int main(int argc, char ** argv){
 			//"$GPGGA,165125.568,,,,,0,00,,,M,0.0,M,,0000*59"
 			std::string lat = "33.70024";
 			std::string lon = "112.09462";
-			std::cout << "$GPGGA,165125.568,33.70024,N,112.09462,W,333,00,,,M,0.0,M,,0000*99" << std::endl;
-			std::cout << rand()%10;
+			std::string prefix = "$GPGGA,165125.568,";
+			std::string suffix = "333,00,,,M,0.0,M,,0000*99";
+			std::string sentence = prefix + lat + rand()%10 + ",N," + lon + ",W," + suffix;
+			std::cout << sentence << std::endl;
+			
 			sleep(1);
 		}
 

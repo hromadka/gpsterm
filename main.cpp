@@ -24,20 +24,21 @@ int main(int argc, char ** argv){
 			std::cout << "  ./gpsterm [options]" << std::endl << std::endl;
 			std::cout << "Input arguments:" << std::endl;
 			std::cout << "  -h              help" << std::endl;
-			std::cout << "  -i              sets ID to the specified integer.  Default ID is 0." << std::endl;
+// actually this is used by gpspubsub, not by the standalone gpsterm
+//			std::cout << "  -i              sets ID to the specified integer.  Default ID is 0." << std::endl;
 			std::cout << "  -p <USB_port>   specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0." << std::endl;
 			std::cout << "  -s              controls simulation mode.  If '-s' flag is used, gpsterm reports a simulated position with random walk.  " << std::endl;
 			std::cout << "  -v 				version info." << std::endl;
 			std::cout << std::endl;
             return 0;
-		} else if ((arg == "-i") || (arg == "--id")) {
-            if (i + 1 < argc) { 
-                provider_id = strtol(argv[i+1], NULL, 10);
-				i++; 
-            } else { 
-                std::cerr << "--id option requires a value!" << std::endl;
-                return 1;
-            }  
+//		} else if ((arg == "-i") || (arg == "--id")) {
+//            if (i + 1 < argc) { 
+//                provider_id = strtol(argv[i+1], NULL, 10);
+//				i++; 
+//            } else { 
+//                std::cerr << "--id option requires a value!" << std::endl;
+//                return 1;
+//            }  
         } else if ((arg == "-p") || (arg == "--port")) {
             if (i + 1 < argc) { 
                 gpsport = argv[i+1];

@@ -1,6 +1,7 @@
 #include <CppLinuxSerial/SerialPort.hpp>
 #include <cstring>
-#include <locale>         // std::locale, std::tolower
+#include <locale>		// std::locale, std::tolower
+#include <unistd.h>		// sleep
 
 using namespace mn::CppLinuxSerial;
 

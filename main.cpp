@@ -11,8 +11,8 @@ int main(int argc, char ** argv){
 
 	for(int i = 1; i < argc; i++) {
 		// print all input params to confirm
-		printf("Argument %d: %s\n", (i+1), argv[i]);
-	/*
+		//printf("Argument %d: %s\n", (i+1), argv[i]);
+	
 		std::string arg = argv[i];
         if ((arg == "-h") || (arg == "--help")) {
             std::cout << "'gpsterm' is a simple utility to read incoming NMEA strings from an attached GPS over a serial port." << std::endl;
@@ -22,7 +22,8 @@ int main(int argc, char ** argv){
             return 0;
         } else if ((arg == "-p") || (arg == "--port")) {
             if (i + 1 < argc) { 
-                gpsport = argv[i++]; 
+                gpsport = argv[i++];
+				std::cout << gpsport << "," << argv[i] << std::endl; 
             } else { 
                 std::cerr << "--port option requires a value!" << std::endl;
                 return 1;
@@ -32,7 +33,7 @@ int main(int argc, char ** argv){
         } else {
             std::cout << "unrecognized input parameter: " << argv[i] << std::endl;
         }
-		*/		
+				
 	}
 		
 	std::cout << "using port /dev/" + gpsport << std::endl;	

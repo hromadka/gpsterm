@@ -15,19 +15,16 @@ int main(int argc, char ** argv){
 
 
 	std::string gpsport = "/dev/ttyUSB0";
-	boolean simulation_mode = false;
+	bool simulation_mode = false;
 
 	for(int i = 1; i < argc; i++) {
 		// print all input params to confirm
 		//printf("Argument %d: %s\n", (i+1), argv[i]);
 		std::string arg = argv[i];
         if ((arg == "-h") || (arg == "--help")) {
-            std::cout << "GPSTERM is a simple utility to read incoming NMEA strings from an attached GPS over a \
-serial port.  "
-			<< std::endl
-			<< std::cout << "-p <USB_port> specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0.  " 
-			<< std::endl
-			<< std::cout << "-s <true/false> controls simulation mode.  If '-s true', gpsterm reports a simulated position with random walk.  ";
+            std::cout << "GPSTERM is a simple utility to read incoming NMEA strings from an attached GPS over a serial port." << std::endl;
+			std::cout << "-p <USB_port> specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0." << std::endl;
+			std::cout << "-s <true/false> controls simulation mode.  If '-s true', gpsterm reports a simulated position with random walk.  " << std::endl;
             return 0;
         } else if ((arg == "-p") || (arg == "--port")) {
             if (i + 1 < argc) { 

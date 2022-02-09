@@ -43,7 +43,8 @@ int main(int argc, char ** argv){
 			std::string lon = "112.09462";
 			std::string prefix = "$GPGGA,165125.568,";
 			std::string suffix = "333,00,,,M,0.0,M,,0000*99";
-			std::string sentence = prefix + lat + rand()%10 + ",N," + lon + ",W," + suffix;
+			std::string rando = std::to_string(rand() % 10);
+			std::string sentence = prefix + lat + rando + ",N," + lon + rando + ",W," + suffix;
 			std::cout << sentence << std::endl;
 			
 			sleep(1);

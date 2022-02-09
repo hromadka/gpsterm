@@ -26,9 +26,8 @@ int main(int argc, char ** argv){
                 return 1;
             }  
 		} else if ((arg == "-s") || (arg == "--sim")) {
-            if (i + 1 < argc) {
-				std::cout << arg_lower << std::endl;		
-                if (arg_lower == "true")
+            if (i + 1 < argc) {		
+                if (argv[i++] == "true")
 					simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
             } else { 
                 std::cerr << "--sim option requires a value!" << std::endl;

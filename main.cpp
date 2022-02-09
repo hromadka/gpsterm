@@ -1,6 +1,6 @@
 #include <CppLinuxSerial/SerialPort.hpp>
 #include <cstring>
-#include <string>		// stoi
+#include <stdlib.h>		// stoi
 #include <locale>		// std::locale, std::tolower
 #include <unistd.h>		// sleep
 
@@ -32,7 +32,7 @@ int main(int argc, char ** argv){
             return 0;
 		} else if ((arg == "-i") || (arg == "--id")) {
             if (i + 1 < argc) { 
-                provider_id = stoi(argv[i+1]);
+                provider_id = strtol(argv[i+1]);
 				i++; 
             } else { 
                 std::cerr << "--id option requires a value!" << std::endl;

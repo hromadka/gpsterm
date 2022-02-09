@@ -65,6 +65,7 @@ int main(int argc, char ** argv){
 		char char_array[1028];
 		// Read some data back (will block until at least 1 byte is received due to the SetTimeout(-1) call above).
 		// TODO: add timer to allow graceful exit from while(1)
+		// TODO: use udev library to detect device removal
 		while (1) {
 			std::string readData;
 			serialPort.Read(readData);
@@ -76,7 +77,7 @@ int main(int argc, char ** argv){
 				if (char_array[i] == '\n') {
 					// do action(s) here
 					std::cout << std::endl;
-					char_array[0] = '\0';  // fix issue with printing newline with every char
+					char_array[0] = '\0';  // fix issue with printing newline with every char by clearing buffer
 				}
 			}
 			

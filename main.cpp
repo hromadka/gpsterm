@@ -5,15 +5,6 @@
 using namespace mn::CppLinuxSerial;
 
 int main(int argc, char ** argv){
-	std::locale loc;
-	std::string str="Test String.\n";
-
-	for(auto elem : str)
-		std::cout << std::tolower(elem,loc);
-
-
-
-
 	std::string gpsport = "/dev/ttyUSB0";
 	bool simulation_mode = false;
 
@@ -36,10 +27,6 @@ int main(int argc, char ** argv){
             }  
 		} else if ((arg == "-s") || (arg == "--sim")) {
             if (i + 1 < argc) {
-				std::string arg_lower = "";
-				std::string argv = argv[i++]; 
-				for(auto elem : argv)
-					arg_lower = std::tolower(elem,loc);	
 				std::cout << arg_lower << std::endl;		
                 if (arg_lower == "true")
 					simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
@@ -52,38 +39,46 @@ int main(int argc, char ** argv){
         }		
 	}
 		
-	// Create serial port object 
-	SerialPort serialPort("/dev/ttyUSB1", BaudRate::B_4800, NumDataBits::EIGHT, Parity::NONE, NumStopBits::ONE);
-	serialPort.SetTimeout(-1); // Block when reading until any data is received
-	
-	std::cout << "opening serial port" << std::endl;
-	
-	serialPort.Open();
 
-	std::cout << "waiting for first endline character" << std::endl;
-	
-	int length = 0;
-	char char_array[1028];
-	// Read some data back (will block until at least 1 byte is received due to the SetTimeout(-1) call above).
-	// TODO: add timer to allow graceful exit from while(1)
-	while (1) {
-		std::string readData;
-		serialPort.Read(readData);
-		strcpy(char_array, readData.c_str());
+	if (simulation_mode) {
+		std::cout << "$GPGGA,165125.568,,,,,0,00,,,M,0.0,M,,0000*59" << std::endl;
 
-		// look for endline trigger and take action when found
- 		length = sizeof(readData);
-		for (int i = 0; i < length; i++) {
-        	if (char_array[i] == '\n') {
-				// do action(s) here
-        		std::cout << std::endl;
-				char_array[0] = '\0';  // fix issue with printing newline with every char
-        	}
-        }
+	} else {
+		// Create serial port object 
+		SerialPort serialPort("/dev/ttyUSB1", BaudRate::B_4800, NumDataBits::EIGHT, Parity::NONE, NumStopBits::ONE);
+		serialPort.SetTimeout(-1); // Block when reading until any data is received
 		
-		std::cout << readData;
+		std::cout << "opening serial port" << std::endl;
+		
+		serialPort.Open();
+
+		std::cout << "waiting for first endline character" << std::endl;
+		
+		int length = 0;
+		char char_array[1028];
+		// Read some data back (will block until at least 1 byte is received due to the SetTimeout(-1) call above).
+		// TODO: add timer to allow graceful exit from while(1)
+		while (1) {
+			std::string readData;
+			serialPort.Read(readData);
+			strcpy(char_array, readData.c_str());
+
+			// look for endline trigger and take action when found
+			length = sizeof(readData);
+			for (int i = 0; i < length; i++) {
+				if (char_array[i] == '\n') {
+					// do action(s) here
+					std::cout << std::endl;
+					char_array[0] = '\0';  // fix issue with printing newline with every char
+				}
+			}
+			
+			std::cout << readData;
+		}
+		
+		// Close the serial port
+		serialPort.Close();
+
 	}
-	
-	// Close the serial port
-	serialPort.Close();
+
 }

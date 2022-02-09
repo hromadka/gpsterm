@@ -1,0 +1,6 @@
+	std::locale loc;
+	std::string str="Test String.\n";
+
+	for(auto elem : str)
+		std::cout << std::tolower(elem,loc);
+

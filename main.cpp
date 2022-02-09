@@ -5,9 +5,8 @@
 using namespace mn::CppLinuxSerial;
 
 int main(int argc, char ** argv){
-	int i;
-
-	for(i=0;i<argc;i++)
+	
+	for(int i = 0; i < argc; i++)
 		printf("Argument %d: %s\n", (i+1), argv[i]);
 		
 	// Create serial port object 
@@ -18,7 +17,6 @@ int main(int argc, char ** argv){
 	
 	serialPort.Open();
 
-	
 	std::cout << "waiting for first endline character" << std::endl;
 	
 	int length = 0;
@@ -28,14 +26,14 @@ int main(int argc, char ** argv){
 	while (1) {
 		std::string readData;
 		serialPort.Read(readData);
-
 		strcpy(char_array, readData.c_str());
+
  		length = sizeof(readData);
 		for (int i = 0; i < length; i++) {
-        		if (char_array[i] == '\n') {
-        			std::cout << std::endl;
-        		}
+        	if (char_array[i] == '\n') {
+        		std::cout << std::endl;
         	}
+        }
 		
 		std::cout << readData;
 	}

@@ -27,7 +27,8 @@ int main(int argc, char ** argv){
             }  
 		} else if ((arg == "-s") || (arg == "--sim")) {
             if (i + 1 < argc) {		
-                if (argv[i++] == "true")
+				std::string argv = argv[i++];
+                if (argv == "true")
 					simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
             } else { 
                 std::cerr << "--sim option requires a value!" << std::endl;
@@ -38,6 +39,8 @@ int main(int argc, char ** argv){
         }		
 	}
 		
+	std::cout << "simulation mode = " << simulation_mode << std::endl;
+
 
 	if (simulation_mode) {
 		std::cout << "$GPGGA,165125.568,,,,,0,00,,,M,0.0,M,,0000*59" << std::endl;

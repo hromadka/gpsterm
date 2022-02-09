@@ -38,7 +38,8 @@ int main(int argc, char ** argv){
             if (i + 1 < argc) {
 				std::string arg_lower = ""; 
 				for(auto elem : arg)
-					arg_lower << std::tolower(elem,loc);			
+					arg_lower = std::tolower(elem,loc);	
+				std::cout << arg_lower << std::endl;		
                 if (arg_lower == "true")
 					simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
 				i++;

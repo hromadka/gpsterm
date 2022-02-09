@@ -22,8 +22,8 @@ int main(int argc, char ** argv){
             return 0;
         } else if ((arg == "-p") || (arg == "--port")) {
             if (i + 1 < argc) { 
-                gpsport = argv[i++];
-				std::cout << gpsport << "," << argv[i] << std::endl; 
+                gpsport = argv[i+1];
+				i++; 
             } else { 
                 std::cerr << "--port option requires a value!" << std::endl;
                 return 1;

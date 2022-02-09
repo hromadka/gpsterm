@@ -5,24 +5,26 @@
 using namespace mn::CppLinuxSerial;
 
 int main(int argc, char ** argv){
-	
+	std::string gpsport = "/dev/ttyUSB0";
+
 	for(int i = 1; i < argc; i++) {
 		// print all input params to confirm
 		//printf("Argument %d: %s\n", (i+1), argv[i]);
 		std::string arg = argv[i];
         if ((arg == "-h") || (arg == "--help")) {
-            std::cout << "GPSTERM is a simple utility to read incoming NMEA strings from an attached GPS over a _
-			serial port that was specified using the '-p <PORT>' flag.  Without this flag, the default port is /dev/ttyUSB0." << std::endl;
+            std::cout << "GPSTERM is a simple utility to read incoming NMEA strings from an attached GPS over a \
+			serial port that was specified using the '-p <PORT>' flag.  Without this flag, the default port is /dev/ttyUSB0." 
+			<< std::endl;
             return 0;
-        } else if ((arg == "-d") || (arg == "--destination")) {
+        } else if ((arg == "-p") || (arg == "--port")) {
             if (i + 1 < argc) { // Make sure we aren't at the end of argv!
-                destination = argv[i++]; // Increment 'i' so we don't get the argument as the next argv[i].
+                gpsport = argv[i++]; // Increment 'i' so we don't get the argument as the next argv[i].
             } else { // Uh-oh, there was no argument to the destination option.
-                  std::cerr << "--destination option requires one argument." << std::endl;
+                std::cerr << "--port option requires a value!" << std::endl;
                 return 1;
             }  
         } else {
-            sources.push_back(argv[i]);
+            std::cout << "unrecognized input parameter: " << argv[i] << std::endl;
         }		
 	}
 		

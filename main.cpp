@@ -22,9 +22,10 @@ int main(int argc, char ** argv){
 		//printf("Argument %d: %s\n", (i+1), argv[i]);
 		std::string arg = argv[i];
         if ((arg == "-h") || (arg == "--help")) {
-            std::cout << "GPSTERM is a simple utility to read incoming NMEA strings from an attached GPS over a serial port." << std::endl;
-			std::cout << "-p <USB_port> specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0." << std::endl;
-			std::cout << "-s <true/false> controls simulation mode.  If '-s true', gpsterm reports a simulated position with random walk.  " << std::endl;
+            std::cout << "'gpsterm' is a simple utility to read incoming NMEA strings from an attached GPS over a serial port." << std::endl;
+			std::cout << "Input arguments:"  << std::endl;
+			std::cout << "  -p <USB_port> specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0." << std::endl;
+			std::cout << "  -s <true> controls simulation mode.  If '-s true', gpsterm reports a simulated position with random walk.  " << std::endl;
             return 0;
         } else if ((arg == "-p") || (arg == "--port")) {
             if (i + 1 < argc) { 
@@ -34,9 +35,13 @@ int main(int argc, char ** argv){
                 return 1;
             }  
 		} else if ((arg == "-s") || (arg == "--sim")) {
-            if (i + 1 < argc) { 
-                if (arg == "true")
+            if (i + 1 < argc) {
+				std::string arg_lower = ""; 
+				for(auto elem : arg)
+					arg_lower << std::tolower(elem,loc);			
+                if (arg_lower == "true")
 					simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
+				i++;
             } else { 
                 std::cerr << "--sim option requires a value!" << std::endl;
                 return 1;

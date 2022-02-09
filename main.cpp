@@ -13,7 +13,7 @@ int main(int argc, char ** argv){
 		std::string arg = argv[i];
         if ((arg == "-h") || (arg == "--help")) {
             std::cout << "GPSTERM is a simple utility to read incoming NMEA strings from an attached GPS over a \
-			serial port that was specified using the '-p <PORT>' flag.  Without this flag, the default port is /dev/ttyUSB0." 
+serial port that was specified using the '-p <PORT>' flag.  Without this flag, the default port is /dev/ttyUSB0." 
 			<< std::endl;
             return 0;
         } else if ((arg == "-p") || (arg == "--port")) {
@@ -53,6 +53,7 @@ int main(int argc, char ** argv){
         	if (char_array[i] == '\n') {
 				// do action(s) here
         		std::cout << std::endl;
+				char_array[0] = '\0';
         	}
         }
 		

@@ -1,11 +1,21 @@
 #include <CppLinuxSerial/SerialPort.hpp>
 #include <cstring>
-
+#include <locale>         // std::locale, std::tolower
 
 using namespace mn::CppLinuxSerial;
 
 int main(int argc, char ** argv){
+	std::locale loc;
+	std::string str="Test String.\n";
+
+	for(auto elem : str)
+		std::cout << std::tolower(elem,loc);
+
+
+
+
 	std::string gpsport = "/dev/ttyUSB0";
+	boolean simulation_mode = false;
 
 	for(int i = 1; i < argc; i++) {
 		// print all input params to confirm
@@ -13,14 +23,25 @@ int main(int argc, char ** argv){
 		std::string arg = argv[i];
         if ((arg == "-h") || (arg == "--help")) {
             std::cout << "GPSTERM is a simple utility to read incoming NMEA strings from an attached GPS over a \
-serial port that was specified using the '-p <PORT>' flag.  Without this flag, the default port is /dev/ttyUSB0." 
-			<< std::endl;
+serial port.  "
+			<< std::endl
+			<< std::cout << "-p <USB_port> specifies USB port under /dev, e.g. '-p ttyUSB1'.  Without this flag, the default port is /dev/ttyUSB0.  " 
+			<< std::endl
+			<< std::cout << "-s <true/false> controls simulation mode.  If '-s true', gpsterm reports a simulated position with random walk.  ";
             return 0;
         } else if ((arg == "-p") || (arg == "--port")) {
-            if (i + 1 < argc) { // Make sure we aren't at the end of argv!
-                gpsport = argv[i++]; // Increment 'i' so we don't get the argument as the next argv[i].
-            } else { // Uh-oh, there was no argument to the destination option.
+            if (i + 1 < argc) { 
+                gpsport = argv[i++]; 
+            } else { 
                 std::cerr << "--port option requires a value!" << std::endl;
+                return 1;
+            }  
+		} else if ((arg == "-s") || (arg == "--sim")) {
+            if (i + 1 < argc) { 
+                if (arg == "true")
+					simulation_mode = true; // technically, only need "-s", without another arg, unless want to pass starting coords this way.
+            } else { 
+                std::cerr << "--sim option requires a value!" << std::endl;
                 return 1;
             }  
         } else {
@@ -53,7 +74,7 @@ serial port that was specified using the '-p <PORT>' flag.  Without this flag, t
         	if (char_array[i] == '\n') {
 				// do action(s) here
         		std::cout << std::endl;
-				char_array[0] = '\0';
+				char_array[0] = '\0';  // fix issue with printing newline with every char
         	}
         }
 		

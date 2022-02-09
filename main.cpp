@@ -4,7 +4,12 @@
 
 using namespace mn::CppLinuxSerial;
 
-int main() {
+int main(int argc, char ** argv){
+	int i;
+
+	for(i=0;i<argc;i++)
+		printf("Argument %d: %s\n", (i+1), argv[i]);
+		
 	// Create serial port object 
 	SerialPort serialPort("/dev/ttyUSB0", BaudRate::B_4800, NumDataBits::EIGHT, Parity::NONE, NumStopBits::ONE);
 	serialPort.SetTimeout(-1); // Block when reading until any data is received
